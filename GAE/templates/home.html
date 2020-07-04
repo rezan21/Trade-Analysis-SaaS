@@ -1,0 +1,149 @@
+{% extends "base.html"%}
+{%block content%}
+{% if error_ %}
+<div class="alert alert-primary" role="alert">
+    {{error_}} 
+</div>
+{% endif %}
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+        <!-- dropdown -->
+        <div class="form-group">
+            {{ form.Asset.label(class="form-control-label") }}
+            {% if form.Asset.errors %}
+                {{ form.Asset(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.Asset.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.Asset(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+
+        <!-- inputs -->
+        <div class="formInputs">
+            <!-- input A -->
+            <div class="form-group makeInline">
+                {{ form.A_Input.label(class="form-control-label") }}
+                {% if form.A_Input.errors %}
+                    {{ form.A_Input(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.A_Input.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.A_Input(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+            <!-- input V -->
+            <div class="form-group">
+                {{ form.V_Input.label(class="form-control-label") }}
+                {% if form.V_Input.errors %}
+                    {{ form.V_Input(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.V_Input.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.V_Input(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+            <!-- input S -->
+            <div class="form-group">
+                {{ form.S_Input.label(class="form-control-label") }}
+                {% if form.S_Input.errors %}
+                    {{ form.S_Input(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.S_Input.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.S_Input(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+            <!-- input R -->
+            <div class="form-group">
+                {{ form.R_Input.label(class="form-control-label") }}
+                {% if form.R_Input.errors %}
+                    {{ form.R_Input(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.R_Input.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.R_Input(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+            <!-- input Res_Type -->
+            <div class="form-group">
+                {{ form.Res_Type.label(class="form-control-label") }}
+                {% if form.Res_Type.errors %}
+                    {{ form.Res_Type(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.Res_Type.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.Res_Type(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+        </div>
+    </fieldset>
+
+    <!-- analyse button -->
+    <div class="form-group">
+        {{ form.submit(class="btn btn-outline-info mainBtn") }}
+    </div>
+</form>
+
+{% if plot %}
+    <!-- Plot -->
+    <div class="chart" id="plot" >
+        <script>
+            var graphs = {{plot | safe}};
+            Plotly.plot('plot',graphs,{});
+        </script>
+    </div>
+
+    <!-- Tables -->
+    <div class="tables">
+        <!-- Trades Table -->
+        <div class="tableStyle">
+            <div class="chart" id="table" >
+                <script>
+                    var graphs = {{table | safe}};
+                    Plotly.plot('table',graphs,{});
+                </script>
+            </div>
+        </div>
+
+        <!-- Summary Table -->
+        <div class="tableStyle">
+            <div class="chart" id="summary" >
+                <script>
+                    var graphs = {{summary | safe}};
+                    Plotly.plot('summary',graphs,{});
+                </script>
+            </div>
+        </div>
+
+    </div>
+    
+{% endif %}
+{%endblock content%}
+
+
+

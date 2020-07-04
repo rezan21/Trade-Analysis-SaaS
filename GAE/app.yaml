@@ -1,0 +1,7 @@
+runtime: python37
+
+entrypoint: gunicorn -b :$PORT app:app --timeout 1900
+
+instance_class: F4_1G
+
+
